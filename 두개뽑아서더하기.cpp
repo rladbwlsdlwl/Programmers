@@ -1,23 +1,22 @@
 #include <string>
 #include <vector>
+#include<set>
 #include<algorithm>
 
 using namespace std;
-bool showIter[201]={false,};
+
 vector<int> solution(vector<int> numbers) {
     vector<int> answer;
-    int len=numbers.size();
+    set <int> temp;
     
-    for(int i=0;i<len;i++){
-        for(int j=i+1;j<len; j++){
-            int sum=numbers[i]+numbers[j];
-            if(showIter[sum]==false){
-                answer.push_back(sum);
-                showIter[sum]=true;
-            }
-        }
+    for(int i=0;i<numbers.size();i++){
+        for(int j=i+1;j<numbers.size();j++)
+            temp.insert(numbers[i]+numbers[j]);
     }
     
-    sort(answer.begin(),answer.end());
+    for(auto iter=temp.begin();iter!=temp.end();iter++)
+        answer.push_back(*iter);
+    
     return answer;
 }
+
