@@ -1,11 +1,17 @@
+from collections import Counter
 def solution(participant, completion):
     answer = ''
-    participant.sort()
-    completion.sort()
+    table=Counter()
     
-    for idx,s in enumerate(participant):
-        if idx==len(participant)-1 or s!=completion[idx]:
-            answer+=s
+    for s in participant:
+        table[s]+=1
+        
+    for s in completion:
+        table[s]-=1
+        
+    for key,value in table.items():
+        if value==1:
+            answer+=key
             break
             
     return answer
